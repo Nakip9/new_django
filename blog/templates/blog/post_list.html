@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Educational Blog — Home{% endblock %}
+
+{% block content %}
+  {# Step 5: Display the posts that the view passes in the context dictionary. #}
+  {% for post in posts %}
+    <article>
+      {# Step 5a: Use the title for the article heading. #}
+      <h2>{{ post.title }}</h2>
+      {# Step 5b: Format the publication date for readers. #}
+      <time datetime="{{ post.published_at|date:"c" }}">
+        Published on {{ post.published_at|date:"F j, Y" }}
+      </time>
+      {# Step 5c: Show the article body, preserving line breaks. #}
+      <p>{{ post.body|linebreaks }}</p>
+    </article>
+  {% empty %}
+    <p>No blog posts yet. Use the Django admin to add your first entry!</p>
+  {% endfor %}
+{% endblock %}
